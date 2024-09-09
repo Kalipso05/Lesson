@@ -17,6 +17,8 @@ namespace API.Models
 		public string? Position { get; set; }
 
 		public string? StructuralDivision { get; set; }
+		public int? IdPosition {  get; set; }
+		public int? idStructuralDivision { get; set; }
 
 		public string? Login { get; set; }
 
@@ -31,6 +33,8 @@ namespace API.Models
 			Patronymic = employee.Patronymic;
 			Position = employee.IdPositionNavigation?.Title;
 			StructuralDivision = employee.IdStructuralDivisionNavigation?.Title;
+			IdPosition = employee.IdPositionNavigation?.Id;
+			idStructuralDivision = employee.IdStructuralDivisionNavigation?.Id;
 			Login = employee.Login;
 			Password = employee.Password;
 		}

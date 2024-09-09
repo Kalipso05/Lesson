@@ -10,7 +10,7 @@ namespace API.Controllers
 	[ApiController]
 	public class EmployeeController : ControllerBase
 	{
-		[HttpGet("Employee")]
+		[HttpGet("EmployeeGet")]
 		public List<EmployeeResponse> GetEmployees()
 		{
 			using (var db = new DbRoadRussiaContext())
@@ -20,5 +20,57 @@ namespace API.Controllers
 				return employeeList;
 			}
 		}
+
+		[HttpPost("EmployeAdd")]
+		public void PostEmployee([FromBody] EmployeeRequest employee)
+		{
+			using (var db = new DbRoadRussiaContext())
+			{
+				var employeeAdd = new Employee()
+				{
+					Id = employee.Id,
+					Name = employee.Name,
+					Surname = employee.Surname,
+					Patronymic = employee.Patronymic ?? null,
+					Photo = employee.Photo ?? null,
+					IdPosition = employee.IdPosition ?? null,
+					IdStructuralDivision = employee.IdStructuralDivision ?? null,
+					Login = employee.Login ?? null,
+					Password = employee.Password ?? null,
+				};
+
+				db.Employees.Add(employeeAdd);
+				db.SaveChanges();
+		
+			}
+		}
+
+		[HttpPut("EmployeePut")]
+		public void PutEmployee([FromBody] EmployeeRequest employee)
+		{
+			using(var db = new DbRoadRussiaContext())
+			{
+				var existingEmployee = db.Employees.FirstOrDefault(e => e.Id == employee.Id);
+
+				if (existingEmployee != null)
+				{
+					var updatedEmployee = new EmployeeRequest()
+					{
+						Id = employee.Id,
+						Name = employee.Name,
+						Surname= employee.Surname,
+						IdPosition= employee.IdPosition ?? null,
+						IdStructuralDivision= employee.IdStructuralDivision ?? null,
+						Login = employee.Login ?? null,
+						Password= employee.Password ?? null,
+						Patronymic = employee.Patronymic ?? null,
+						Photo = employee.Photo ?? null
+						
+					};
+				}
+			}
+		}
 	}
+
+	
 }

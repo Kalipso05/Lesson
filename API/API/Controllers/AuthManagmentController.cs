@@ -25,7 +25,7 @@ namespace API.Controllers
 		}
 
 		[HttpPost("Login")]
-		public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
+		public async Task<IActionResult> Login([FromBody] EmployeeRequest user)
 		{
 			using(var db = new DbRoadRussiaContext())
 			{

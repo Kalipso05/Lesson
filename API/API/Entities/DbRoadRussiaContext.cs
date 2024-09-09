@@ -31,7 +31,6 @@ public partial class DbRoadRussiaContext : DbContext
         {
             entity.ToTable("Employee");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Login).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Password).HasMaxLength(50);
@@ -51,7 +50,6 @@ public partial class DbRoadRussiaContext : DbContext
         {
             entity.ToTable("Position");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Title).HasMaxLength(50);
         });
 
@@ -59,7 +57,6 @@ public partial class DbRoadRussiaContext : DbContext
         {
             entity.ToTable("StructuralDivision");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Title).HasMaxLength(50);
         });
 

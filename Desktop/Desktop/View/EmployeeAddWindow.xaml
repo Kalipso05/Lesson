@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop.View"
         mc:Ignorable="d"
-        Title="EmployeeAddWindow" Height="450" Width="360">
-    <Border BorderThickness="2" BorderBrush="Gray" Width="300" Height="300">
-        <StackPanel>
-            <Label Content="Фотография"  FontWeight="Bold" Foreground="DarkGray"/>
-            <Button Content="Выберите фотографию" Width="348" Style="{StaticResource RoundedButtonStyle}"/>
+        Title="EmployeeAddWindow" Height="450" Width="460">
+    <Border BorderThickness="2" BorderBrush="Gray" Width="400" Height="400" CornerRadius="10">
+        <StackPanel Margin="15">
+            <Label Content="Фотография"  FontWeight="Bold" Foreground="Black"/>
+            <Button Content="Выберите фотографию" Width="348" Style="{StaticResource RoundedButtonStyle}" Click="SelectPhoto_Click"/>
 
-            <Label Content="Имя"  FontWeight="Bold" Foreground="DarkGray"/>
-            <TextBox Width="347"/>
+            <Label Content="Имя"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbName" Width="347"/>
 
-            <Label Content="Фамилия"  FontWeight="Bold" Foreground="DarkGray"/>
-            <TextBox Width="347"/>
+            <Label Content="Фамилия"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbSurname" Width="347"/>
 
-            <Label Content="Отчество"  FontWeight="Bold" Foreground="DarkGray"/>
-            <TextBox Width="347"/>
+            <Label Content="Отчество"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbPatronymic" Width="347"/>
+
+            <Label Content="Подразделение"  FontWeight="Bold" Foreground="Black"/>
+            <ComboBox x:Name="cmbSelectDivision" Width="347"/>
+
+            <Label Content="Должность"  FontWeight="Bold" Foreground="Black"/>
+            <ComboBox x:Name="cmbSelectPosition" Width="347"/>
+
+            <Button Content="Сохранить" Margin="25" Style="{StaticResource RoundedButtonStyle}" Click="AddEmployee_Click"/>
         </StackPanel>
     </Border>
 </Window>

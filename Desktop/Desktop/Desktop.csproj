@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ViewDivisionModel.cs" />
+    <Compile Include="Model\ViewEmployeeRequestModel.cs" />
+    <Compile Include="Model\ViewPositionModel.cs" />
     <Compile Include="View\EmployeeAddWindow.xaml.cs">
       <DependentUpon>EmployeeAddWindow.xaml</DependentUpon>
     </Compile>

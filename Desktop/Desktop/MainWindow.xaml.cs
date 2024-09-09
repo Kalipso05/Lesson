@@ -34,7 +34,7 @@ namespace Desktop
 		{
 			using (var client = new HttpClient())
 			{
-				string url = "https://localhost:44317/api/Employee/Employee";
+				string url = "https://localhost:44317/api/Employee/EmployeeGet";
 				var response = await client.GetAsync(url);
 				if(response.IsSuccessStatusCode)
 				{
@@ -54,6 +54,16 @@ namespace Desktop
 		{
 			var win = new EmployeeAddWindow();
 			win.Show();
+		}
+
+		private void EmployeeEdit_Click(object sender, RoutedEventArgs e)
+		{
+
+        }
+
+		private void EmployeeDelete_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

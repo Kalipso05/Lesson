@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace Desktop.Model
 {
-	public class ViewEmployeeModel
+	internal class ViewEmployeeRequestModel
 	{
 		public int Id { get; set; }
 
+		public byte[] Photo { get; set; }
+
 		public string Name { get; set; } 
 
-		public string Surname { get; set; } 
+		public string Surname { get; set; }
 
 		public string Patronymic { get; set; }
 
-		public string Position { get; set; }
+		public int IdPosition { get; set; }
 
-		public string StructuralDivision { get; set; }
+		public int IdStructuralDivision { get; set; }
 
 		public string Login { get; set; }
 
