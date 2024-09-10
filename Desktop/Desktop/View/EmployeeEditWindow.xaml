@@ -1,0 +1,32 @@
+﻿<Window x:Class="Desktop.View.EmployeeEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop.View"
+        mc:Ignorable="d"
+        Title="EmployeeEditWindow" Height="450" Width="800">
+    <Border BorderThickness="2" BorderBrush="Gray" Width="400" Height="400" CornerRadius="10">
+        <StackPanel Margin="15">
+            <Label Content="Фотография"  FontWeight="Bold" Foreground="Black"/>
+            <Button Content="Выберите фотографию" Width="348" Style="{StaticResource RoundedButtonStyle}" Click="SelectPhoto_Click"/>
+
+            <Label Content="Имя"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbName" Width="347" IsEnabled="False"/>
+
+            <Label Content="Фамилия"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbSurname" Width="347" IsEnabled="False"/>
+
+            <Label Content="Отчество"  FontWeight="Bold" Foreground="Black"/>
+            <TextBox x:Name="txbPatronymic" Width="347" IsEnabled="False"/>
+
+            <Label Content="Подразделение"  FontWeight="Bold" Foreground="Black"/>
+            <ComboBox x:Name="cmbSelectDivision" Width="347"/>
+
+            <Label Content="Должность"  FontWeight="Bold" Foreground="Black"/>
+            <ComboBox x:Name="cmbSelectPosition" Width="347" SelectedIndex="1"/>
+
+            <Button Content="Сохранить" Margin="25" Style="{StaticResource RoundedButtonStyle}" Click="AddEmployee_Click"/>
+        </StackPanel>
+    </Border>
+</Window>

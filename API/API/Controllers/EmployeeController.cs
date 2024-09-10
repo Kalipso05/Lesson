@@ -65,8 +65,24 @@ namespace API.Controllers
 						Password= employee.Password ?? null,
 						Patronymic = employee.Patronymic ?? null,
 						Photo = employee.Photo ?? null
-						
 					};
+
+					db.Entry(existingEmployee).CurrentValues.SetValues(updatedEmployee);
+					db.SaveChanges();
+				}
+			}
+		}
+
+		[HttpDelete("EmployeeDelete/{id}")]
+		public void DeleteEmployee(int id)
+		{
+			using(var db = new DbRoadRussiaContext())
+			{
+				var employee = db.Employees.FirstOrDefault(p =>  p.Id == id);
+				if (employee != null)
+				{
+					db.Employees.Remove(employee);
+					db.SaveChanges(true);
 				}
 			}
 		}

@@ -58,12 +58,31 @@ namespace Desktop
 
 		private void EmployeeEdit_Click(object sender, RoutedEventArgs e)
 		{
+			var selectedEmployee = listView.SelectedItem as ViewEmployeeModel;
+
+			var win = new EmployeeEditWindow(selectedEmployee);
+			win.Show();
 
         }
 
-		private void EmployeeDelete_Click(object sender, RoutedEventArgs e)
+		private async void EmployeeDelete_Click(object sender, RoutedEventArgs e)
 		{
+			var selectedEmployee = listView.SelectedItem as ViewEmployeeModel;
 
+			using(var client = new HttpClient())
+			{
+				var response = await client.DeleteAsync($"https://localhost:44317/api/Employee/EmployeeDelete/{selectedEmployee.Id}");
+
+				if (response.IsSuccessStatusCode)
+				{
+					MessageBox.Show("Сотрудник был удален");
+					LoadEmployees();
+				}
+				else
+				{
+					MessageBox.Show("Произошла ошибка");
+				}
+			}
 		}
 	}
 }

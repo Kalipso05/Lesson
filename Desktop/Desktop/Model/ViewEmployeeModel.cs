@@ -9,7 +9,7 @@ namespace Desktop.Model
 	public class ViewEmployeeModel
 	{
 		public int Id { get; set; }
-
+		public byte[] Photo { get; set; }
 		public string Name { get; set; } 
 
 		public string Surname { get; set; } 
@@ -23,5 +23,8 @@ namespace Desktop.Model
 		public string Login { get; set; }
 
 		public string Password { get; set; }
+
+		public int IdPosition { get; set; }
+		public int IdStructuralDivision { get; set; }
 	}
 }

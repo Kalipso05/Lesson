@@ -19,3 +19,5 @@ C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\Desktop.pdb
 C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\App.baml
 C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\View\EmployeeAddWindow.g.cs
 C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\View\EmployeeAddWindow.baml
+C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\View\EmployeeEditWindow.g.cs
+C:\Users\ServerPC\Desktop\gk_RoadRussia\Desktop\Desktop\obj\Debug\View\EmployeeEditWindow.baml

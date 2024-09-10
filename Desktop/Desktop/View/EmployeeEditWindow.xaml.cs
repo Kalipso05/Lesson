@@ -1,7 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using Desktop.Model;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,26 +16,32 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.Win32;
-using Desktop.Model;
-using System.Net.Http;
-using Newtonsoft.Json;
 
 namespace Desktop.View
 {
 	/// <summary>
-	/// Логика взаимодействия для EmployeeAddWindow.xaml
+	/// Логика взаимодействия для EmployeeEditWindow.xaml
 	/// </summary>
-	public partial class EmployeeAddWindow : Window
+	public partial class EmployeeEditWindow : Window
 	{
-		private static byte[] ImageBytes {  get; set; }
+		private static ViewEmployeeModel _employeeModel;
+		private static byte[] ImageBytes { get; set; }
+
 		private List<ViewDivisionModel> Divisions { get; set; }
 		private List<ViewPositionModel> Positions { get; set; }
-		public EmployeeAddWindow()
+
+		public EmployeeEditWindow(ViewEmployeeModel employee)
 		{
 			InitializeComponent();
-			LoadData();	
+			LoadData();
+			_employeeModel = employee;
+			txbName.Text = employee.Name;
+			txbSurname.Text = employee.Surname;
+			txbPatronymic.Text = employee.Patronymic;
+			ImageBytes = employee.Photo;
 		}
+
+
 
 		public async Task<List<ViewPositionModel>> GetViewPositions()
 		{
@@ -79,55 +89,39 @@ namespace Desktop.View
 
 		private async void AddEmployee_Click(object sender, RoutedEventArgs e)
 		{
+
 			var positionId = Convert.ToInt32(cmbSelectPosition.SelectedValue);
 			var divisionId = Convert.ToInt32(cmbSelectDivision.SelectedValue);
 
-			if (txbName.Text != "" && txbPatronymic.Text != "" && txbSurname.Text != "")
+			var employee = new ViewEmployeeRequestModel()
 			{
-				if(positionId != 0 && divisionId != 0)
+				Id = _employeeModel.Id,
+				IdPosition = positionId == 0 ? (_employeeModel.IdPosition) : (positionId),
+				IdStructuralDivision = divisionId == 0 ? (_employeeModel.IdStructuralDivision) : (divisionId),
+				Name = _employeeModel.Name,
+				Surname = _employeeModel.Surname,
+				Patronymic = _employeeModel.Patronymic,
+				Photo = ImageBytes
+			};
+
+			var content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
+
+			using (var client = new HttpClient())
+			{
+				var response = await client.PutAsync("https://localhost:44317/api/Employee/EmployeePut", content);
+
+				if (response.IsSuccessStatusCode)
 				{
-					if (ImageBytes != null)
-					{
-						var employee = new ViewEmployeeRequestModel()
-						{
-							IdPosition = positionId,
-							IdStructuralDivision = divisionId,
-							Name = txbName.Text,
-							Surname = txbSurname.Text,
-							Patronymic = txbPatronymic.Text,
-							Photo = ImageBytes
-						};
-
-						var content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
-
-						using(var client = new HttpClient())
-						{
-							var response = await client.PostAsync("https://localhost:44317/api/Employee/EmployeAdd", content);
-
-							if(response.IsSuccessStatusCode)
-							{
-								MessageBox.Show("Сотрудник добавлен в базу данных!");
-							}
-							else
-							{
-								MessageBox.Show("Произошла ошибка!");
-							}
-						}
-					}
-					else
-					{
-						MessageBox.Show("Выберите фотографию");
-					}
+					MessageBox.Show("Данные сотрудника были обновлены");
 				}
 				else
 				{
-					MessageBox.Show("Выберите подразделение и должность");
+					MessageBox.Show("Произошла ошибка!");
 				}
 			}
-			else
-			{
-				MessageBox.Show("Имя, Фамилия, Отчество не должны быть пустыми");
-			}
+
+
+
 		}
 	}
 }
